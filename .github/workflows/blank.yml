@@ -1,0 +1,96 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+
+public class SellerRatingApp {
+    private JFrame frame;
+    private JTextField subjectNameField;
+    private JTextField sksField;
+    private JTable table;
+    private DefaultTableModel tableModel;
+    private JComboBox<String> tokoComboBox;
+    private JTextField ratingField;
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                SellerRatingApp window = new SellerRatingApp();
+                window.frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public SellerRatingApp() {
+        initialize();
+    }
+
+    private void initialize() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new BorderLayout());
+
+        // Create components
+        subjectNameField = new JTextField();
+        sksField = new JTextField();
+        tokoComboBox = new JComboBox<>(new String[]{"toko mainan", "toko makanan"});
+        ratingField = new JTextField();
+        JButton saveButton = new JButton("Save");
+        JButton deleteButton = new JButton("Delete");
+
+        // Table initialization
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("Toko");
+        tableModel.addColumn("Rating");
+        tableModel.addColumn("Created_at");
+        table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+        // Panel for input fields
+        JPanel inputPanel = new JPanel(new GridLayout(2, 5));
+        inputPanel.add(new JLabel("Toko: "));
+        inputPanel.add(tokoComboBox);
+        inputPanel.add(new JLabel("Rating: "));
+        inputPanel.add(ratingField);
+        inputPanel.add(saveButton);
+        inputPanel.add(new JLabel());
+        inputPanel.add(new JLabel());
+        inputPanel.add(deleteButton);
+
+        frame.getContentPane().add(inputPanel, BorderLayout.SOUTH);
+
+        // Save button action listener
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveRating();
+            }
+        });
+
+        // Delete button action listener
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteRating();
+            }
+        });
+    }
+
+    private void saveRating() {
+        // Implement the logic for saving rating
+        // Validation and data insertion to the tableModel
+    }
+
+    private void deleteRating() {
+        // Implement the logic for deleting rating
+        // Validation and data deletion from the tableModel
+    }
+}
